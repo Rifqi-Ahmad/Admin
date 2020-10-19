@@ -27,10 +27,9 @@ class CreateMasterbarangTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE masterbarang ALTER COLUMN id SET NOT NULL ALTER COLUMN id set DEFAULT NEXTVAL ('masterbarang_seq');");
+        DB::statement("ALTER TABLE masterbarang ALTER COLUMN id SET NOT NULL ALTER COLUMN id set DEFAULT NEXTVAL ('masterbarang_seq') ALTER SEQUENCE masterbarang_seq
+        OWNED BY masterbarang.id;");
 
-        DB::statement("ALTER SEQUENCE masterbarang_seq
-        OWNED BY masterbarang.id");
     }
 
     /**
