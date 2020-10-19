@@ -25,8 +25,6 @@ class CreateMasterbarangTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE masterbarang ALTER COLUMN id TYPE SERIAL PRIMARY KEY;");
-
     }
 
     /**
