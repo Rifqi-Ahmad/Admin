@@ -15,8 +15,6 @@ class CreateMasterbarangTable extends Migration
     public function up()
     {
 
-        DB::statement("CREATE SEQUENCE masterbarang_seq;");
-
         Schema::create('masterbarang', function (Blueprint $table) {
             $table->increments('id');
             $table->char('code', 6)->unique();
@@ -26,9 +24,6 @@ class CreateMasterbarangTable extends Migration
             $table->integer('prize');
             $table->timestamps();
         });
-
-        DB::statement("ALTER TABLE masterbarang ALTER COLUMN id SET NOT NULL ALTER COLUMN id set DEFAULT NEXTVAL ('masterbarang_seq') ALTER SEQUENCE masterbarang_seq
-        OWNED BY masterbarang.id;");
 
     }
 
