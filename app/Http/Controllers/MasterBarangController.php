@@ -20,11 +20,10 @@ class MasterBarangController extends Controller
         $code = 'CP' . sprintf("%03s", $count);
 
         $iter = MasterBarang::max('id');
-        $counter = (int) $iter;
-        $counter++;
+        $iter++;
 
         $masterbarang = MasterBarang::all();
-        return view('/masterbarang/index', ['masterbarang' => $masterbarang], ['code' => $code], ['id' => $counter]);
+        return view('/masterbarang/index', ['masterbarang' => $masterbarang], ['code' => $code], ['id' => $iter]);
     }
 
     /**
