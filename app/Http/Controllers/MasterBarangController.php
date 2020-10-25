@@ -19,12 +19,8 @@ class MasterBarangController extends Controller
         $count++;
         $code = 'CP' . sprintf("%03s", $count);
 
-        $iter = MasterBarang::max('id');
-        $id = (int)$iter;
-        $id++;
-
         $masterbarang = MasterBarang::all();
-        return view('/masterbarang/index', ['masterbarang' => $masterbarang], array('id' => $id ,'code' => $code));
+        return view('/masterbarang/index', ['masterbarang' => $masterbarang], ['id' => $id ,'code' => $code]);
     }
 
     /**
@@ -45,7 +41,21 @@ class MasterBarangController extends Controller
      */
     public function store(Request $request)
     {
-        MasterBarang::create($request->all());
+
+        $iter = MasterBarang::max('id');
+        $id = (int)$iter;
+        $id++;
+
+
+        MasterBarang::create([
+            'id' => $id,
+            'code' => $request->code,
+            'desc' => $request->desc,
+            'color' => $request->color,
+            'size' => $request->size,
+            'prize' => $request->prize,
+
+        ]);
         return redirect('/masterbarang')->with('status', 'Data Berhasil di Tambahkan');
     }
 
