@@ -16,7 +16,7 @@ class CreateMasterbarangTable extends Migration
     {
 
         Schema::create('masterbarang', function (Blueprint $table) {
-            $table->BigIncrements('id');
+            $table->integer('id');
             $table->char('code', 6)->unique();
             $table->string('desc');
             $table->string('color');
