@@ -137,7 +137,7 @@
                     <div class="modal-body">
                         <form action="/masterbarang" method="POST">
                             @csrf
-                            <input type="hidden" name="id" id="id" value="{{$counter}}">
+                            <input type="text" name="id" id="id" value="{{$counter}}">
                             <div class="form-group">
                                 <label for="nama">Code</label>
                                 <input type="text" class="form-control" id="code" name="code" value="{{$code ?? ''}}">
