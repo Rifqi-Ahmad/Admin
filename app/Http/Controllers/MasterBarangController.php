@@ -23,7 +23,7 @@ class MasterBarangController extends Controller
         $iter++;
 
         $masterbarang = MasterBarang::all();
-        return view('/masterbarang/index', ['masterbarang' => $masterbarang], ['code' => $code], ['id' => $iter]);
+        return view('/masterbarang/index', ['masterbarang' => $masterbarang], ['code' => $code, 'id' => $iter]);
     }
 
     /**
