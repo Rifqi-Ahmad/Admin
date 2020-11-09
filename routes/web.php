@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'DashboardController@home');
 Route::get('/purchaseorder', 'PurchaseOrderController@index');
+Route::get('/purchaseorder/data', 'PurchaseOrderController@data');
 Route::get('/aruskas', 'ArusKasController@index');
 Route::get('/aset', 'AsetController@index');
 Route::get('/salesorder', 'SalesOrderController@index');
-Route::get('/stokalat', 'StokAlatController@index');
+Route::get('/salesorder/data', 'SalesOrderController@data');
+Route::get('/stokmaterial', 'StokMaterialController@index');
 Route::get('/stokbarang', 'StokBarangController@index');
+
 
 // Master Barang
 Route::get('/masterbarang', 'MasterBarangController@index');

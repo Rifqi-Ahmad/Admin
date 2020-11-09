@@ -1,6 +1,6 @@
 @extends('layout/main')
 
-@section('title', 'Stok Barang')
+@section('title', 'Stok Material')
 
 @section('container')
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class StokAlatController extends Controller
+class StokMaterialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class StokAlatController extends Controller
      */
     public function index()
     {
-        return view('/stokalat/index');
+        return view('/stokmaterial/index');
     }
 
     /**

@@ -13,6 +13,7 @@
         crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous">
     </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -67,14 +68,14 @@
                     <div class="nav mt-2">
                         <a class="nav-link mt-auto" href="{{url('/stokbarang')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-archive"></i></div>
-                            Stok Barang
+                            Stok Barang Jadi
                         </a>
                     </div>
 
                     <div class="nav mt-2">
-                        <a class="nav-link mt-auto" href="{{url('/stokalat')}}">
+                        <a class="nav-link mt-auto" href="{{url('/stokmaterial')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-toolbox"></i></div>
-                            Stok Alat
+                            Stok Material
                         </a>
                     </div>
 

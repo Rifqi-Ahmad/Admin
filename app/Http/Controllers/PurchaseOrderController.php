@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MasterBarang;
 use Illuminate\Http\Request;
 
 class PurchaseOrderController extends Controller
@@ -13,7 +14,13 @@ class PurchaseOrderController extends Controller
      */
     public function index()
     {
-        return view('/purchaseorder/index');
+
+        return view('/purchaseorder/index',);
+    }
+
+    public function data()
+    {
+        return view('/purchaseorder/data');
     }
 
     /**
@@ -45,7 +52,6 @@ class PurchaseOrderController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**

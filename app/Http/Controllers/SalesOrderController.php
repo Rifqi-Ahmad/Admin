@@ -16,6 +16,11 @@ class SalesOrderController extends Controller
         return view('/salesorder/index');
     }
 
+    public function data()
+    {
+        return view('/salesorder/data');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
