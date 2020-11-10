@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\MasterBarang;
+use App\PurchaseOrder;
 use Illuminate\Http\Request;
 
 class PurchaseOrderController extends Controller
@@ -41,7 +41,32 @@ class PurchaseOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $iter = PurchaseOrder::max('id');
+        $id = (int)$iter;
+        $id++;
+
+        $date = $request->date;
+        $desc = $request->desc;
+        $color = $request->color;
+        $unit = $request->unit;
+        $qty = $request->qty;
+        $prize = $request->prize;
+        $sub = $request->sub;
+
+
+        PurchaseOrder::create([
+            'id' => $id,
+            'code' => $request->code,
+            'date' => $date,
+            'desc' => $desc,
+            'color' => $color,
+            'unit' => $unit,
+            'qty' => $qty,
+            'prize' => $prize,
+            'sub' => $sub,
+            'total' => $request->total
+        ]);
+        return redirect('/purchaseorder')->with('status', 'Data Berhasil di Tambahkan');
     }
 
     /**
@@ -50,7 +75,7 @@ class PurchaseOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PurchaseOrder $purchaseOrder)
     {
     }
 
@@ -60,7 +85,7 @@ class PurchaseOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PurchaseOrder $purchaseOrder)
     {
         //
     }
@@ -72,7 +97,7 @@ class PurchaseOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PurchaseOrder $purchaseOrder)
     {
         //
     }
@@ -83,7 +108,7 @@ class PurchaseOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PurchaseOrder $purchaseOrder)
     {
         //
     }

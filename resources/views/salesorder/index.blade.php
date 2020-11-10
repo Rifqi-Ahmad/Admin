@@ -10,19 +10,22 @@
             {{-- Content --}}
             <div class="mt-4">
                 <center>
-                    <h1>Sales Order</h1>
-                    <h5>SO/THN/BLN/001</h5>
+                    <h1>Purchase Order</h1>
+                    <h5>PO/THN/BLN/001</h5>
                 </center>
+
             </div>
 
             <div class="mt-4">
-                <form action="" method="GET">
+                <form action="" method="POST">
+                    @csrf
                     <div class="my-2">
-                        <a href="/salesorder/data" class="btn btn-primary" style="float: right">Lihat
+                        <a href="/purchaseorder/data" class="btn btn-primary" style="float: right">Lihat
                             Data</a>
-                        <input type="submit" name="simpan" class="btn btn-outline-success" value="Simpan">
+                        <button type="submit" name="simpan" class="btn btn-outline-success">Simpan</button>
                         <input type="submit" name="hapus" class="btn btn-outline-danger" value="hapus">
                     </div>
+
                     <table border="0" width=400px>
                         <tr>
                             <th>
@@ -53,76 +56,61 @@
 
                     <div class="form-group control-group row mt-4 after-add-more">
                         <div class="col">
-                            <select name="code" id="code" class="form-control">
-                                <option value="">Pilih :</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
+                            <input type="text" class="form-control" name="code" placeholder="Code">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Desc">
+                            <input type="text" class="form-control" name="desc" placeholder="Desc">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Color">
+                            <input type="text" class="form-control" name="color" placeholder="Color">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Qty">
+                            <input type="text" class="form-control" name="unit" placeholder="Unit">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Unit Price">
+                            <input type="text" class="form-control" name="qty" placeholder="Qty">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Total Price">
+                            <input type="text" class="form-control" name="price" placeholder="Unit Price">
                         </div>
                         <div class="col">
-                            <button class="btn btn-danger remove d-none" type="button"><i
-                                    class="glyphicon glyphicon-remove"></i>
-                                Remove</button>
+                            <button class="btn btn-success" type="button" name="tambah">Tambah</button>
                         </div>
 
                     </div>
-                    <div class="col">
-                        <button class="btn btn-success add-more" type="button">
-                            <i class="glyphicon glyphicon-plus"></i> Add
-                        </button>
+
+                    <hr>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="purchase">
+                            <thead>
+                                <tr>
+                                    <th>Desc</th>
+                                    <th>Color</th>
+                                    <th>Unit</th>
+                                    <th>Qty</th>
+                                    <th>Unit Price</th>
+                                    <th>Sub Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                        <input type="text" class="form-control total" name="total" id="total" placeholder="Total">
+                                    </td>
+                                </tr>
+                            </tfoot>
+
+                        </table>
                     </div>
+            
                 </form>
-
-                <div class="copy d-none">
-                    <div class="form-group control-group row mt-4">
-                        <div class="col">
-                            <select name="code" id="code" class="form-control">
-                                <option value="">Pilih :</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Desc">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Color">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Qty">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Unit Price">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Total Price">
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-danger remove" type="button"><i
-                                    class="glyphicon glyphicon-remove"></i>
-                                Remove</button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+
             {{-- End Content --}}
 
         </div>
@@ -135,23 +123,5 @@
         </div>
     </footer>
 </div>
-
-{{-- Script --}}
-
-<script type="text/javascript">
-    $(document).ready(function() {
-          $(".add-more").click(function(){ 
-              var html = $(".copy").html();
-              $(".after-add-more").after(html);
-          });
-    
-          // saat tombol remove dklik control group akan dihapus 
-          $("body").on("click",".remove",function(){ 
-              $(this).parents(".control-group").remove();
-          });
-        });
-</script>
-
-{{-- End Script --}}
 
 @endsection

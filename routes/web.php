@@ -1,5 +1,6 @@
 <?php
 
+use App\PurchaseOrder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'DashboardController@home');
+
+//Purchase Order
 Route::get('/purchaseorder', 'PurchaseOrderController@index');
 Route::get('/purchaseorder/data', 'PurchaseOrderController@data');
+Route::post('purchaseorder', 'PurchaseOrderController@store')->name('puchaseorder.insert');
+
+
 Route::get('/aruskas', 'ArusKasController@index');
 Route::get('/aset', 'AsetController@index');
 Route::get('/salesorder', 'SalesOrderController@index');
