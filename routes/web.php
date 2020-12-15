@@ -19,7 +19,7 @@ Route::get('/', 'DashboardController@home');
 //Purchase Order
 Route::get('/purchaseorder', 'PurchaseOrderController@index');
 Route::get('/purchaseorder/data', 'PurchaseOrderController@data');
-Route::post('purchaseorder', 'PurchaseOrderController@store')->name('puchaseorder.insert');
+Route::post('/purchaseorder', 'PurchaseOrderController@index');
 
 
 Route::get('/aruskas', 'ArusKasController@index');

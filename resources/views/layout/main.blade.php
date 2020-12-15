@@ -65,12 +65,12 @@
                         </a>
                     </div>
 
-                    <div class="nav mt-2">
+                    {{-- <div class="nav mt-2">
                         <a class="nav-link mt-auto" href="{{url('/stokbarang')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-archive"></i></div>
                             Stok Barang Jadi
                         </a>
-                    </div>
+                    </div> --}}
 
                     <div class="nav mt-2">
                         <a class="nav-link mt-auto" href="{{url('/stokmaterial')}}">
@@ -79,19 +79,19 @@
                         </a>
                     </div>
 
-                    <div class="nav mt-2">
+                    {{-- <div class="nav mt-2">
                         <a class="nav-link mt-auto" href="{{url('/aset')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-hand-holding-usd"></i></div>
                             Aset
                         </a>
-                    </div>
+                    </div> --}}
 
-                    <div class="nav mt-2">
+                    {{-- <div class="nav mt-2">
                         <a class="nav-link mt-auto" href="{{url('/aruskas')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
                             Arus Kas
                         </a>
-                    </div>
+                    </div> --}}
 
                     <div class="nav mt-2">
                         <a class="nav-link mt-auto" href="{{url('/salesorder')}}">

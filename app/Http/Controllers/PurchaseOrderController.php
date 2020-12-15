@@ -15,7 +15,14 @@ class PurchaseOrderController extends Controller
     public function index()
     {
 
-        return view('/purchaseorder/index',);
+        $t = date('Y');
+        $b = date('m');
+        $max = PurchaseOrder::max('code');
+        $count = (int) substr($max, 11, 3);
+        $count++;
+        $code = 'PO/'.$t.'/'.$b.'/'.sprintf("%03s", $count);
+
+        return view('/purchaseorder/index',['code' => $code]);
     }
 
     public function data()
@@ -51,8 +58,6 @@ class PurchaseOrderController extends Controller
         $unit = $request->unit;
         $qty = $request->qty;
         $prize = $request->prize;
-        $sub = $request->sub;
-
 
         PurchaseOrder::create([
             'id' => $id,
@@ -63,7 +68,6 @@ class PurchaseOrderController extends Controller
             'unit' => $unit,
             'qty' => $qty,
             'prize' => $prize,
-            'sub' => $sub,
             'total' => $request->total
         ]);
         return redirect('/purchaseorder')->with('status', 'Data Berhasil di Tambahkan');
