@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\PurchaseOrder;
+use App\cart;
+use Session;
+use DB;
 use Illuminate\Http\Request;
 
 class PurchaseOrderController extends Controller
@@ -17,10 +19,12 @@ class PurchaseOrderController extends Controller
 
         $t = date('Y');
         $b = date('m');
-        $max = PurchaseOrder::max('code');
+        $max = DB::table('purchaseorder')->max('code');
         $count = (int) substr($max, 11, 3);
         $count++;
         $code = 'PO/'.$t.'/'.$b.'/'.sprintf("%03s", $count);
+
+        Session(['code' => $code]);
 
         return view('/purchaseorder/index',['code' => $code]);
     }
@@ -29,6 +33,41 @@ class PurchaseOrderController extends Controller
     {
         return view('/purchaseorder/data');
     }
+
+   
+
+    public function add(Request $request){
+
+        Session([
+            'tgl' => $request->tgl,
+            'vendor' => $request->vendor,
+            'note' => $request->note
+        ]);
+
+        \Cart::add(array(
+            'id' => $request->id,
+            'desc' => $request->desc,
+            'color' => $request->color,
+            'unit' => $request->unit,
+            'qty' => (int)($request->qty),
+            'price' => (int)($request->price),
+            'sub' => (int)$request->qty * (int)$request->price
+        ));
+        return redirect()->route('po.index');
+
+    }
+
+    public function remove(Request $request){
+        \Cart::remove($request->id);
+        return redirect()->route('po.index');
+    }
+
+    public function clear(Request $request){
+        Session::flush();
+        \Cart::clear();
+        return redirect()->route('po.index');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -48,29 +87,7 @@ class PurchaseOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $iter = PurchaseOrder::max('id');
-        $id = (int)$iter;
-        $id++;
-
-        $date = $request->date;
-        $desc = $request->desc;
-        $color = $request->color;
-        $unit = $request->unit;
-        $qty = $request->qty;
-        $prize = $request->prize;
-
-        PurchaseOrder::create([
-            'id' => $id,
-            'code' => $request->code,
-            'date' => $date,
-            'desc' => $desc,
-            'color' => $color,
-            'unit' => $unit,
-            'qty' => $qty,
-            'prize' => $prize,
-            'total' => $request->total
-        ]);
-        return redirect('/purchaseorder')->with('status', 'Data Berhasil di Tambahkan');
+        
     }
 
     /**

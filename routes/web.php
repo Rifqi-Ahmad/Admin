@@ -17,15 +17,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'DashboardController@home');
 
 //Purchase Order
-Route::get('/purchaseorder', 'PurchaseOrderController@index');
+Route::get('/purchaseorder', 'PurchaseOrderController@index')->name('po.index');
 Route::get('/purchaseorder/data', 'PurchaseOrderController@data');
-Route::post('/purchaseorder', 'PurchaseOrderController@index');
+Route::post('/purchaseorder', 'PurchaseOrderController@add')->name('po.add');
+Route::post('/purchaseorder/{id}', 'PurchaseOrderController@remove')->name('po.remove');
+Route::patch('/purchaseorder', 'PurchaseOrderController@clear')->name('po.clear');
+
+//Sales Order
+Route::get('/salesorder', 'SalesOrderController@index')->name('so.index');
+Route::get('/salesorder/data', 'SalesOrderController@data');
+Route::post('/salesorder', 'SalesOrderController@add')->name('so.add');
+Route::post('/salesorder/{id}', 'SalesOrderController@remove')->name('so.remove');
+Route::patch('/salesorder', 'SalesOrderController@clear')->name('so.clear');
 
 
 Route::get('/aruskas', 'ArusKasController@index');
 Route::get('/aset', 'AsetController@index');
-Route::get('/salesorder', 'SalesOrderController@index');
-Route::get('/salesorder/data', 'SalesOrderController@data');
 Route::get('/stokmaterial', 'StokMaterialController@index');
 Route::get('/stokbarang', 'StokBarangController@index');
 

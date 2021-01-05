@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\cart;
+use Session;
+use DB;
 
 class SalesOrderController extends Controller
 {
@@ -19,6 +22,39 @@ class SalesOrderController extends Controller
     public function data()
     {
         return view('/salesorder/data');
+    }
+
+
+    public function add(Request $request){
+
+        Session([
+            'tgl' => $request->tgl,
+            'vendor' => $request->vendor,
+            'note' => $request->note
+        ]);
+
+        \Cart::add(array(
+            'id' => $request->id,
+            'desc' => $request->desc,
+            'color' => $request->color,
+            'unit' => $request->unit,
+            'qty' => (int)($request->qty),
+            'price' => (int)($request->price),
+            'sub' => (int)$request->qty * (int)$request->price
+        ));
+        return redirect()->route('so.index');
+
+    }
+
+    public function remove(Request $request){
+        \Cart::remove($request->id);
+        return redirect()->route('so.index');
+    }
+
+    public function clear(Request $request){
+        Session::flush();
+        \Cart::clear();
+        return redirect()->route('so.index');
     }
 
     /**
