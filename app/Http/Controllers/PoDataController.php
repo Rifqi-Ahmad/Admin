@@ -185,8 +185,6 @@ class PoDataController extends Controller
                 ]
             );
         }
-        Session::flush();
-        \Cart::clear();
         return redirect()->route('data.edit', Session()->get('index'));
     }
 

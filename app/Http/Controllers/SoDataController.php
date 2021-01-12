@@ -11,6 +11,11 @@ class SoDataController extends Controller
 {
     public function index()
     {
+        if (Session::has('index')) {
+            Session::flush();
+            \Cart::clear();
+        }
+
         $data = DB::table('salesorder')->get();
         return view('/salesorder/data', compact('data'));
     }
@@ -78,7 +83,8 @@ class SoDataController extends Controller
         Session([
             'tgl' => $data->date,
             'code' => $data->code,
-            'vendor' => $data->vendor,
+            'take' => $data->take,
+            'finished' => $data->finished,
             'note' => $data->note
         ]);
 
@@ -188,8 +194,6 @@ class SoDataController extends Controller
                 ]
             );
         }
-        Session::flush();
-        \Cart::clear();
         return redirect()->route('sdata.edit', Session()->get('index'));
     }
 
