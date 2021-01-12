@@ -188,6 +188,8 @@ class SoDataController extends Controller
                 ]
             );
         }
+        Session::flush();
+        \Cart::clear();
         return redirect()->route('sdata.edit', Session()->get('index'));
     }
 
