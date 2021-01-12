@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\PurchaseOrder;
-use App\cart;
+use App\Cart;
 use Session;
 use DB;
 use Illuminate\Http\Request;
@@ -15,8 +15,7 @@ class PurchaseOrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-
+    {  
         $t = date('Y');
         $b = date('m');
         $max = DB::table('purchaseorder')->max('code');
@@ -39,7 +38,6 @@ class PurchaseOrderController extends Controller
     public function add(Request $request){
 
         Session([
-            'tgl' => $request->tgl,
             'vendor' => $request->vendor,
             'note' => $request->note
         ]);
@@ -53,6 +51,14 @@ class PurchaseOrderController extends Controller
             'price' => (int)($request->price),
             'sub' => (int)$request->qty * (int)$request->price
         ));
+
+        $total = 0;
+
+        foreach(\Cart::getContent() as $item){
+            $total+= $item->sub;
+            Session(['total' => $total]);    
+        }
+
         return redirect()->route('po.index');
 
     }
@@ -76,7 +82,41 @@ class PurchaseOrderController extends Controller
      */
     public function create()
     {
-        //
+        $iter = DB::table('purchaseorder')->max('id');
+        $id = (int)$iter;
+        $id++;
+
+        DB::table('purchaseorder')->insert([
+            'id' => $id,
+            'code' => Session::get('code'),
+            'date' => date('d-m-y'),
+            'vendor' => Session::get('vendor'),
+            'note' => Session::get('note')
+        ]);
+
+        foreach(\Cart::getContent() as $item){
+            $iters = DB::table('podetail')->max('id');
+            $ids = (int)$iters;
+            $ids++;
+
+            DB::table('podetail')->insert([
+                'id' => $ids,
+                'pocode' => Session::get('code'),
+                'code' => $item->id,
+                'desc' => $item->desc,
+                'color' => $item->color,
+                'unit' => $item->unit,
+                'qty' => $item->qty,
+                'price' => $item->price,
+                'sub' => $item->sub
+            ]);
+        }
+
+        Session::flush();
+        \Cart::clear();
+
+        return redirect()->route('po.index');
+        
     }
 
     /**
@@ -87,7 +127,7 @@ class PurchaseOrderController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**

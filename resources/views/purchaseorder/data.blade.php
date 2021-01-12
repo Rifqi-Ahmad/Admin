@@ -14,16 +14,38 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode</th>
-                                <th>Deskripsi</th>
-                                <th>Warna</th>
-                                <th>Ukuran</th>
-                                <th>Harga</th>
+                                <th>Id</th>
+                                <th>Tanggal</th>
+                                <th>Vendor</th>
+                                <th>Note</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $data)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$data->code}}</td>
+                                <td>{{$data->date}}</td>
+                                <td>{{$data->vendor}}</td>
+                                <td>{{$data->note}}</td>
+                                <td>
+                                    <a href="/purchaseorder/data/{{$data->id}}/po" class="btn btn-success"><i
+                                            class="fas fa-table"></i></a>
 
+                                    <a href="/purchaseorder/data/{{$data->id}}/edit" class="btn btn-primary"><i
+                                            class="far fa-edit"></i></a>
+
+                                    <form action="{{route('data.delete', $data->id)}}" method="post" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"><i
+                                                class="far fa-trash-alt"></i></button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

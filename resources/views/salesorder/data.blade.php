@@ -14,16 +14,40 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode</th>
-                                <th>Deskripsi</th>
-                                <th>Warna</th>
-                                <th>Ukuran</th>
-                                <th>Harga</th>
-                                <th>Aksi</th>
+                                <th>Code</th>
+                                <th>Date</th>
+                                <th>Take Order</th>
+                                <th>Finished</th>
+                                <th>Note</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $data)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$data->code}}</td>
+                                <td>{{$data->date}}</td>
+                                <td>{{$data->take}}</td>
+                                <td>{{$data->finished}}</td>
+                                <td>{{$data->note}}</td>
+                                <td>
+                                    <a href="/salesorder/data/{{$data->id}}/so" class="btn btn-success"><i
+                                            class="fas fa-table"></i></a>
 
+                                    <a href="/salesorder/data/{{$data->id}}/edit" class="btn btn-primary"><i
+                                            class="far fa-edit"></i></a>
+
+                                    <form action="{{route('sdata.delete', $data->id)}}" method="post" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"><i
+                                                class="far fa-trash-alt"></i></button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

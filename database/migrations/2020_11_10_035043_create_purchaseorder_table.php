@@ -17,13 +17,8 @@ class CreatePurchaseorderTable extends Migration
             $table->integer('id');
             $table->string('code')->unique();
             $table->date('date');
-            $table->string('desc');
-            $table->string('color');
-            $table->char('unit', 5);
-            $table->integer('qty');
-            $table->integer('price');
-            $table->integer('sub');
-            $table->integer('total');
+            $table->string('vendor');
+            $table->string('note');
             $table->timestamps();
         });
     }

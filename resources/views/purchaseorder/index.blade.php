@@ -19,16 +19,24 @@
             </div>
 
             <div class="mt-4">
-                <form action="/purchaseorder" method="POST">
-                    @method('patch')
-                    @csrf
-                    <div class="my-2">
+                
+                    <div class="my-2" style="">
                         <a href="/purchaseorder/data" class="btn btn-primary" style="float: right">Lihat
                             Data</a>
-                        <button type="submit" name="save" class="btn btn-outline-success">Save</button>
-                        <button type="submit" name="clear" class="btn btn-outline-success">Clear</button>
+
+                        <form action="/purchaseorder" method="post" style="display: inline">
+                            @method('put')
+                            @csrf
+                            <button type="submit" name="save" class="btn btn-outline-success">Save</button>
+                        </form>
+
+                        <form action="/purchaseorder" method="POST" style="display: inline">
+                            @method('patch')
+                            @csrf
+                            <button type="submit" name="clear" class="btn btn-outline-success">Clear</button>
+                        </form>
                     </div>
-                </form>
+                
 
                 <form action="{{route('po.add')}}" method="post">
                     @csrf
@@ -59,7 +67,7 @@
                                 Note
                             </th>
                             <th>
-                                @if (Session::has('vendor'))
+                                @if (Session::has('note'))
                                     <textarea name="note" id="" cols="30" rows="3">{{Session::get('note')}}</textarea>
                                 @else
                                     <textarea name="note" id="" cols="30" rows="3"></textarea>
@@ -98,40 +106,59 @@
                 </form>             
             </div>
 
-                
-                    <table border="0" class="table table-striped">
-                        @foreach (Cart::getContent() as $item)
-                        <tr>
-                            <th>
-                                {{$item->id}}
-                            </th>
-                            <td>
-                                {{$item->desc}}
-                            </td>
-                            <td>
-                                {{$item->color}}
-                            </td>
-                            <td>
-                                {{$item->unit}}
-                            </td>
-                            <td>
-                                {{$item->qty}}
-                            </td>
-                            <td>
-                                {{$item->price}}
-                            </td>
-                            <td>
-                                {{$item->sub}}
-                            </td>
-                            <td>
-                                <form action="/purchaseorder/{{$item->id}}" method="post">
-                                @csrf
-                                    <button type="submit" class="btn btn-danger">X</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach 
-                    </table>
+            @if (Session::has('vendor'))
+                <table border="0" class="table table-striped">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>Desc</th>
+                        <th>Color</th>
+                        <th>Unit</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Sub Price</th>
+                        <th>Action</th>
+                    </tr>
+
+                    @foreach (Cart::getContent() as $item)
+                    
+                    <tr>
+                        <th>
+                            {{$item->id}}
+                        </th>
+                        <td>
+                            {{$item->desc}}
+                        </td>
+                        <td>
+                            {{$item->color}}
+                        </td>
+                        <td>
+                            {{$item->unit}}
+                        </td>
+                        <td>
+                            {{$item->qty}}
+                        </td>
+                        <td>
+                            {{$item->price}}
+                        </td>
+                        <td>
+                            {{$item->sub}}
+                        </td>
+                        <td>
+                            <form action="/purchaseorder/{{$item->id}}" method="post">
+                            @csrf
+                                <button type="submit" class="btn btn-danger">X</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach 
+
+                    <tr>
+                        <th colspan="8">Grand Price : Rp {{Session::get('total')}}</th>
+                    </tr>
+                </table>
+            @endif
+                    
                  
 
             {{-- End Content --}}

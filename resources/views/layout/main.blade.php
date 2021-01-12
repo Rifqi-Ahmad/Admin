@@ -67,113 +67,113 @@
 
                     {{-- <div class="nav mt-2">
                         <a class="nav-link mt-auto" href="{{url('/stokbarang')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-archive"></i></div>
-                            Stok Barang Jadi
-                        </a>
-                    </div> --}}
+                    <div class="sb-nav-link-icon"><i class="fas fa-archive"></i></div>
+                    Stok Barang Jadi
+                    </a>
+                </div> --}}
 
-                    <div class="nav mt-2">
-                        <a class="nav-link mt-auto" href="{{url('/stokmaterial')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-toolbox"></i></div>
-                            Stok Material
-                        </a>
-                    </div>
+                <div class="nav mt-2">
+                    <a class="nav-link mt-auto" href="{{url('/stokmaterial')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-toolbox"></i></div>
+                        Stok Material
+                    </a>
+                </div>
 
-                    {{-- <div class="nav mt-2">
+                {{-- <div class="nav mt-2">
                         <a class="nav-link mt-auto" href="{{url('/aset')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                            Aset
-                        </a>
-                    </div> --}}
+                <div class="sb-nav-link-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                Aset
+                </a>
+        </div> --}}
 
-                    {{-- <div class="nav mt-2">
+        {{-- <div class="nav mt-2">
                         <a class="nav-link mt-auto" href="{{url('/aruskas')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
-                            Arus Kas
-                        </a>
-                    </div> --}}
+        <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
+        Arus Kas
+        </a>
+    </div> --}}
 
-                    <div class="nav mt-2">
-                        <a class="nav-link mt-auto" href="{{url('/salesorder')}}">
-                            <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></i></div>
-                            Sales Order
-                        </a>
-                    </div>
+    <div class="nav mt-2">
+        <a class="nav-link mt-auto" href="{{url('/salesorder')}}">
+            <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></i></div>
+            Sales Order
+        </a>
+    </div>
 
-                    <div class="nav mt-2">
-                        <a class="nav-link mt-auto" href="{{url('/masterbarang')}}">
-                            <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></i></div>
-                            Master Barang
-                        </a>
-                    </div>
-                    <!-- End Navbar Menu -->
+    <div class="nav mt-2">
+        <a class="nav-link mt-auto" href="{{url('/masterbarang')}}">
+            <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></i></div>
+            Master Barang
+        </a>
+    </div>
+    <!-- End Navbar Menu -->
 
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="sb-sidenav-footer">
+        <div class="small">Logged in as:</div>
+        Start Bootstrap
+    </div>
+    <!-- End Sidebar Footer -->
+
+    </nav>
+    </div>
+    <!-- End Sidebar -->
+
+    <!-- Content -->
+    @yield('container')
+
+    <!-- Modal -->
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="judulModal">Tambah Data Master Barang</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
-                <!-- Sidebar Footer -->
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
-                </div>
-                <!-- End Sidebar Footer -->
-
-            </nav>
-        </div>
-        <!-- End Sidebar -->
-
-        <!-- Content -->
-        @yield('container')
-
-        <!-- Modal -->
-        <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="judulModal">Tambah Data Master Barang</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-                        <form action="/masterbarang" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" id="id">
-                            <div class="form-group">
-                                <label for="nama">Code</label>
-                                <input type="text" class="form-control" id="code" name="code" value="{{$code ?? ''}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="alamat">Description</label>
-                                <input type="text" class="form-control" id="desc" name="desc">
-                            </div>
-                            <div class="form-group">
-                                <label for="alamat">Color</label>
-                                <input type="text" class="form-control" id="color" name="color">
-                            </div>
-                            <div class="form-group">
-                                <label for="alamat">Size</label>
-                                <input type="text" class="form-control" id="size" name="size">
-                            </div>
-                            <div class="form-group">
-                                <label for="alamat">Prize</label>
-                                <input type="text" class="form-control" id="prize" name="prize">
-                            </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Tambah Data</button>
-                        </form>
-                    </div>
+                <div class="modal-body">
+                    <form action="/masterbarang" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" id="id">
+                        <div class="form-group">
+                            <label for="nama">Code</label>
+                            <input type="text" class="form-control" id="code" name="code" value="{{$code ?? ''}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Description</label>
+                            <input type="text" class="form-control" id="desc" name="desc">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Color</label>
+                            <input type="text" class="form-control" id="color" name="color">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Size</label>
+                            <input type="text" class="form-control" id="size" name="size">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Prize</label>
+                            <input type="text" class="form-control" id="prize" name="prize">
+                        </div>
 
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Tambah Data</button>
+                    </form>
+                </div>
+
             </div>
         </div>
-        <!-- End Modal -->
+    </div>
+    <!-- End Modal -->
 
 
-        <!-- End Content -->
+    <!-- End Content -->
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous">

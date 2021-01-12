@@ -16,20 +16,26 @@ class SalesOrderController extends Controller
      */
     public function index()
     {
-        return view('/salesorder/index');
-    }
+        $t = date('Y');
+        $b = date('m');
+        $max = DB::table('salesorder')->max('code');
+        $count = (int) substr($max, 11, 3);
+        $count++;
+        $code = 'SO/'.$t.'/'.$b.'/'.sprintf("%03s", $count);
 
-    public function data()
-    {
-        return view('/salesorder/data');
-    }
+        Session(['code' => $code]);
 
+        $br = DB::table('masterbarang')->get();
+
+        return view('/salesorder/index',compact('code', 'br'));
+    }
 
     public function add(Request $request){
 
         Session([
             'tgl' => $request->tgl,
-            'vendor' => $request->vendor,
+            'take' => $request->take,
+            'finished' => $request->finished,
             'note' => $request->note
         ]);
 
@@ -42,6 +48,14 @@ class SalesOrderController extends Controller
             'price' => (int)($request->price),
             'sub' => (int)$request->qty * (int)$request->price
         ));
+
+        $total = 0;
+
+        foreach(\Cart::getContent() as $item){
+            $total+= $item->sub;
+            Session(['total' => $total]);    
+        }
+
         return redirect()->route('so.index');
 
     }
@@ -64,7 +78,41 @@ class SalesOrderController extends Controller
      */
     public function create()
     {
-        //
+        $iter = DB::table('salesorder')->max('id');
+        $id = (int)$iter;
+        $id++;
+
+        DB::table('salesorder')->insert([
+            'id' => $id,
+            'code' => Session::get('code'),
+            'date' => date('d-m-y'),
+            'take' => Session::get('take'),
+            'finished' => Session::get('finished'),
+            'note' => Session::get('note')
+        ]);
+
+        foreach(\Cart::getContent() as $item){
+            $iters = DB::table('sodetail')->max('id');
+            $ids = (int)$iters;
+            $ids++;
+
+            DB::table('sodetail')->insert([
+                'id' => $ids,
+                'pocode' => Session::get('code'),
+                'code' => $item->id,
+                'desc' => $item->desc,
+                'color' => $item->color,
+                'unit' => $item->unit,
+                'qty' => $item->qty,
+                'price' => $item->price,
+                'sub' => $item->sub
+            ]);
+        }
+
+        Session::flush();
+        \Cart::clear();
+
+        return redirect()->route('so.index');
     }
 
     /**
