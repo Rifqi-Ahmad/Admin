@@ -12,6 +12,11 @@ class PoDataController extends Controller
 {
     public function index()
     {
+        if (Session::has('index')) {
+            Session::flush();
+            \Cart::clear();
+        }
+        
         $data = DB::table('purchaseorder')->get();
         return view('/purchaseorder/data', compact('data'));
     }
