@@ -75,7 +75,7 @@
                 <div class="nav mt-2">
                     <a class="nav-link mt-auto" href="{{url('/stokmaterial')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-toolbox"></i></div>
-                        Stok Material
+                        Stok
                     </a>
                 </div>
 
@@ -95,15 +95,22 @@
 
     <div class="nav mt-2">
         <a class="nav-link mt-auto" href="{{url('/salesorder')}}">
-            <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></i></div>
+            <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></div>
             Sales Order
         </a>
     </div>
 
     <div class="nav mt-2">
         <a class="nav-link mt-auto" href="{{url('/masterbarang')}}">
-            <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></i></div>
+            <div class="sb-nav-link-icon"><i class="far fa-file-alt"></i></div>
             Master Barang
+        </a>
+    </div>
+
+    <div class="nav mt-2">
+        <a class="nav-link mt-auto" href="{{url('/keuangan')}}">
+            <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
+            Laporan Keuangan
         </a>
     </div>
     <!-- End Navbar Menu -->

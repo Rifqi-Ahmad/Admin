@@ -16,6 +16,13 @@
 
             </div>
 
+
+            @if (session('status'))
+            <div class="alert alert-danger mt-4">
+                {{ session('status') }}
+            </div>
+            @endif
+
             <div class="mt-4">
                 <div class="my-2">
                     <a href="/salesorder/data" class="btn btn-primary" style="float: right">Lihat
@@ -29,7 +36,7 @@
                     <form action="/salesorder" method="POST" style="display: inline">
                         @method('patch')
                         @csrf
-                        <button type="submit" name="clear" class="btn btn-outline-success">Clear</button>
+                        <button type="submit" name="clear" class="btn btn-outline-danger">Clear</button>
                     </form>
                 </div>
 
@@ -41,7 +48,7 @@
                                 Date
                             </th>
                             <th>
-                                <input type="text" name="tgl" value="{{ date('l, d-m-Y') }}" readonly>
+                                <input type="text" name="tgl" value="{{ date('l, d-m-Y') }}">
                             </th>
                         </tr>
                         <tr>
@@ -76,7 +83,8 @@
                                 @if (Session::has('note'))
                                 <textarea name="note" id="" cols="30" rows="3">{{Session::get('note')}}</textarea>
                                 @else
-                                <textarea name="note" id="" cols="30" rows="3"></textarea>
+                                <textarea name="note" id="" cols="30" rows="3"
+                                    placeholder="Untuk Laporan Keuangan"></textarea>
                                 @endif
 
                             </th>

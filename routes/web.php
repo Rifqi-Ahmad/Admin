@@ -28,10 +28,6 @@ Route::delete('/purchaseorder/data/{id}', 'PoDataController@delete')->name('data
 Route::get('/purchaseorder/data', 'PoDataController@index')->name('data.index');
 Route::get('/purchaseorder/data/{id}/po', 'PoDataController@show')->name('data.show');
 Route::get('/purchaseorder/data/{id}/pdf', 'PoDataController@pdf')->name('data.pdf');
-Route::post('/purchaseorder/data/{id}/edit', 'PoDataController@add')->name('data.add');
-Route::post('/purchaseorder/data/{id}/edit/{code}', 'PoDataController@remove')->name('data.remove');
-Route::get('/purchaseorder/data/{id}/edit', 'PoDataController@edit')->name('data.edit');
-Route::put('/purchaseorder/data/{id}/edit', 'PoDataController@update')->name('data.update');
 
 
 
@@ -49,15 +45,22 @@ Route::get('/salesorder/data', 'SoDataController@index')->name('sdata.index');
 Route::delete('/salesorder/data/{id}', 'SoDataController@delete')->name('sdata.delete');
 Route::get('/salesorder/data/{id}/so', 'SoDataController@show')->name('sdata.show');
 Route::get('/salesorder/data/{id}/pdf', 'SoDataController@pdf')->name('sdata.pdf');
-Route::post('/salesorder/data/{id}/edit', 'SoDataController@add')->name('sdata.add');
-Route::post('/salesorder/data/{id}/edit/{code}', 'SoDataController@remove')->name('sdata.remove');
-Route::get('/salesorder/data/{id}/edit', 'SoDataController@edit')->name('sdata.edit');
 Route::put('/salesorder/data/{id}/edit', 'SoDataController@update')->name('sdata.update');
 
 
 
 
 Route::get('/stokmaterial', 'StokMaterialController@index');
+
+
+
+Route::get('/keuangan', 'Keuangan@index');
+Route::post('/keuangan', 'Keuangan@insert');
+Route::delete('/keuangan/{id}', 'Keuangan@delete');
+Route::patch('/keuangan/{id}', 'Keuangan@edit');
+
+
+
 
 // Master Barang
 Route::get('/masterbarang', 'MasterBarangController@index');

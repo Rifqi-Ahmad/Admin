@@ -1,6 +1,6 @@
 @extends('layout/main')
 
-@section('title', 'Purchase Order')
+@section('title', 'Sales Order')
 
 
 
@@ -12,7 +12,7 @@
             {{-- Content --}}
             <div class="mt-4">
                 <center>
-                    <h1>Purchase Order</h1>
+                    <h1>Sales Order</h1>
                     <h5>{{$data->code}}</h5>
                 </center>
 
@@ -30,8 +30,7 @@
                             Date
                         </th>
                         <th>
-                            <input type="text" name="tgl" value="{{ date('l, d-m-Y', strtotime($data->date)) }}"
-                                readonly>
+                            <input type="text" name="tgl" value="{{ date('l, d-m-Y', $data->date) }}" readonly>
                         </th>
                     </tr>
                     <tr>
@@ -39,7 +38,7 @@
                             Take Order
                         </th>
                         <th>
-                            <input type="date" name="take" value="{{ $data->take }}" readonly>
+                            <input type="text" name="take" value="{{ date('l, d-m-Y', $data->take) }}" readonly>
                         </th>
                     </tr>
                     <tr>
@@ -47,7 +46,7 @@
                             Finished
                         </th>
                         <th>
-                            <input type="date" name="finished" value="{{ $data->finished }}" readonly>
+                            <input type="text" name="finished" value="{{ date('l, d-m-Y', $data->finished) }}" readonly>
                         </th>
                     </tr>
                     <tr>
@@ -73,7 +72,7 @@
                     <th>Price</th>
                     <th>Sub Price</th>
                 </tr>
-                @foreach (Cart::getContent() as $item)
+                @foreach ($data1 as $item)
 
                 <tr>
                     <th>
@@ -100,7 +99,7 @@
                 </tr>
                 @endforeach
                 <tr>
-                    <th colspan="8">Grand Price : Rp {{Session::get('total')}}</th>
+                    <th colspan="8">Grand Price : Rp {{$data->total}}</th>
                 </tr>
             </table>
 

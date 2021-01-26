@@ -78,20 +78,31 @@ class SalesOrderController extends Controller
      */
     public function create()
     {
-        $iter = DB::table('salesorder')->max('id');
-        $id = (int)$iter;
-        $id++;
 
-        DB::table('salesorder')->insert([
-            'id' => $id,
-            'code' => Session::get('code'),
-            'date' => date('d-m-y'),
-            'take' => Session::get('take'),
-            'finished' => Session::get('finished'),
-            'note' => Session::get('note')
-        ]);
+        $sisa = 0;
 
         foreach(\Cart::getContent() as $item){
+
+            $sto = DB::table('stok')
+            ->where('id', '=', $item->id)
+            ->first();
+
+            (int)$stok = $sto->qty;
+            (int)$jumlah = $item->qty;
+
+            $sisa = $stok - $jumlah;
+
+            if($stok < $jumlah || $stok == 0 ){
+                return redirect()->route('so.index')->with('status', 'Stok Kurang');
+            }
+
+            DB::table('stok')
+                ->where('id', '=', $item->id)
+                ->update([
+                    'qty' => $sisa
+                ]);
+
+
             $iters = DB::table('sodetail')->max('id');
             $ids = (int)$iters;
             $ids++;
@@ -109,11 +120,37 @@ class SalesOrderController extends Controller
             ]);
         }
 
+        $iter = DB::table('salesorder')->max('id');
+        $id = (int)$iter;
+        $id++;
+
+        $loop = DB::table('keuangan')->max('id');
+        $codes = (int)$loop;
+        $codes++;
+
+        DB::table('salesorder')->insert([
+            'id' => $id,
+            'code' => Session::get('code'),
+            'date' => time(),
+            'take' => strtotime(Session::get('take')),
+            'finished' => strtotime(Session::get('finished')),
+            'note' => Session::get('note'),
+            'total' => Session::get('total')
+        ]);
+
+        DB::table('keuangan')->insert([
+            'id' => $codes,
+            'date' => time(),
+            'keterangan' => Session::get('note'),
+            'debet' => Session::get('total'),
+        ]);
+
         Session::flush();
         \Cart::clear();
 
         return redirect()->route('so.index');
     }
+
 
     /**
      * Store a newly created resource in storage.

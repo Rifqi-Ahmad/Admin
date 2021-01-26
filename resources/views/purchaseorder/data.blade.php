@@ -8,46 +8,54 @@
     <main>
         <div class="container-fluid">
             {{-- Content --}}
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Id</th>
-                                <th>Tanggal</th>
-                                <th>Vendor</th>
-                                <th>Note</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $data)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$data->code}}</td>
-                                <td>{{$data->date}}</td>
-                                <td>{{$data->vendor}}</td>
-                                <td>{{$data->note}}</td>
-                                <td>
-                                    <a href="/purchaseorder/data/{{$data->id}}/po" class="btn btn-success"><i
-                                            class="fas fa-table"></i></a>
+            <div class="card mt-4">
 
-                                    <a href="/purchaseorder/data/{{$data->id}}/edit" class="btn btn-primary"><i
-                                            class="far fa-edit"></i></a>
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    List Data
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Id</th>
+                                    <th>Tanggal</th>
+                                    <th>Vendor</th>
+                                    <th>Note</th>
+                                    <th>Total</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $data)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$data->code}}</td>
+                                    <td>{{date('d-m-Y',$data->date)}}</td>
+                                    <td>{{$data->vendor}}</td>
+                                    <td>{{$data->note}}</td>
+                                    <td>{{$data->total}}</td>
+                                    <td>
+                                        <a href="/purchaseorder/data/{{$data->id}}/po" class="btn btn-primary"><i
+                                                class="fas fa-table"></i></a>
 
-                                    <form action="{{route('data.delete', $data->id)}}" method="post" class="d-inline">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger"><i
-                                                class="far fa-trash-alt"></i></button>
-                                    </form>
+                                        <form action="{{route('data.delete', $data->id)}}" method="post"
+                                            class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                        </form>
 
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    </td>
+
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             {{-- End Content --}}

@@ -8,48 +8,54 @@
     <main>
         <div class="container-fluid">
             {{-- Content --}}
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Code</th>
-                                <th>Date</th>
-                                <th>Take Order</th>
-                                <th>Finished</th>
-                                <th>Note</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $data)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$data->code}}</td>
-                                <td>{{$data->date}}</td>
-                                <td>{{$data->take}}</td>
-                                <td>{{$data->finished}}</td>
-                                <td>{{$data->note}}</td>
-                                <td>
-                                    <a href="/salesorder/data/{{$data->id}}/so" class="btn btn-success"><i
-                                            class="fas fa-table"></i></a>
+            <div class="card mt-4">
 
-                                    <a href="/salesorder/data/{{$data->id}}/edit" class="btn btn-primary"><i
-                                            class="far fa-edit"></i></a>
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    List Data
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Code</th>
+                                    <th>Date</th>
+                                    <th>Take Order</th>
+                                    <th>Finished</th>
+                                    <th>Note</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $data)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$data->code}}</td>
+                                    <td>{{date('d-m-Y',$data->date)}}</td>
+                                    <td>{{date('d-m-Y',$data->take)}}</td>
+                                    <td>{{date('d-m-Y',$data->finished)}}</td>
+                                    <td>{{$data->note}}</td>
+                                    <td>{{$data->total}}</td>
+                                    <td>
+                                        <a href="/salesorder/data/{{$data->id}}/so" class="btn btn-primary"><i
+                                                class="fas fa-table"></i></a>
 
-                                    <form action="{{route('sdata.delete', $data->id)}}" method="post" class="d-inline">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger"><i
-                                                class="far fa-trash-alt"></i></button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                        <form action="{{route('sdata.delete', $data->id)}}" method="post"
+                                            class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             {{-- End Content --}}

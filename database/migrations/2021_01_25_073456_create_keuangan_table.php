@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSalesorderTable extends Migration
+class CreateKeuanganTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateSalesorderTable extends Migration
      */
     public function up()
     {
-        Schema::create('salesorder', function (Blueprint $table) {
-            $table->integer('id');
-            $table->string('code')->unique();
+        Schema::create('keuangan', function (Blueprint $table) {
+            $table->integer('id')->unique();
             $table->integer('date');
-            $table->integer('take');
-            $table->integer('finished');
-            $table->string('note');
-            $table->integer('total');
+            $table->string('keterangan');
+            $table->integer('debet')->nullable($value = true);
+            $table->integer('kredit')->nullable($value = true);
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateSalesorderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salesorder');
+        Schema::dropIfExists('keuangan');
     }
 }

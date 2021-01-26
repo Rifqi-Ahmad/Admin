@@ -25,15 +25,15 @@ class PurchaseOrderController extends Controller
 
         Session(['code' => $code]);
 
-        return view('/purchaseorder/index',['code' => $code]);
+        $br = DB::table('masterbarang')->get();
+
+        return view('/purchaseorder/index',compact('code', 'br'));
     }
 
     public function data()
     {
         return view('/purchaseorder/data');
     }
-
-   
 
     public function add(Request $request){
 
@@ -82,19 +82,47 @@ class PurchaseOrderController extends Controller
      */
     public function create()
     {
-        $iter = DB::table('purchaseorder')->max('id');
-        $id = (int)$iter;
-        $id++;
-
-        DB::table('purchaseorder')->insert([
-            'id' => $id,
-            'code' => Session::get('code'),
-            'date' => date('d-m-y'),
-            'vendor' => Session::get('vendor'),
-            'note' => Session::get('note')
-        ]);
-
+        
         foreach(\Cart::getContent() as $item){
+           
+            $sto = DB::table('stok')
+            ->where('id', '=', $item->id)
+            ->first();
+
+            (int)$stok = $sto->qty;
+            (int)$jumlah = $item->qty;
+            $sum = $stok + $jumlah;   
+
+            DB::table('stok')
+                ->updateOrInsert(
+                    ['id' => $item->id,],
+                    [
+                    'desc' => $item->desc, 
+                    'color' => $item->color,
+                     'unit' => $item->unit,
+                    'price' => $item->price,
+                    'qty' => $sum
+                    ]
+            );
+
+            $mbid = DB::table('masterbarang')->max('id');
+            $mb = (int)$mbid;
+            $mb++;
+
+            DB::table('masterbarang')
+                ->updateOrInsert(
+                    [
+                    'code' => $item->id
+                    ],
+                    [
+                    'id' => $mb,
+                    'desc' => $item->desc,
+                    'color' => $item->color,
+                    'size' => $item->unit,
+                    'prize' => $item->price,
+                    ]
+            );
+
             $iters = DB::table('podetail')->max('id');
             $ids = (int)$iters;
             $ids++;
@@ -110,7 +138,33 @@ class PurchaseOrderController extends Controller
                 'price' => $item->price,
                 'sub' => $item->sub
             ]);
+            
         }
+
+        $iter = DB::table('purchaseorder')->max('id');
+        $id = (int)$iter;
+        $id++;
+
+        $loop = DB::table('keuangan')->max('id');
+        $codes = (int)$loop;
+        $codes++;
+
+        DB::table('purchaseorder')->insert([
+            'id' => $id,
+            'code' => Session::get('code'),
+            'date' => time(),
+            'vendor' => Session::get('vendor'),
+            'note' => Session::get('note'),
+            'total' => Session::get('total')
+        ]);
+
+        DB::table('keuangan')->insert([
+            'id' => $codes,
+            'date' => time(),
+            'keterangan' => Session::get('note'),
+            'kredit' => Session::get('total')
+        ]);
+
 
         Session::flush();
         \Cart::clear();

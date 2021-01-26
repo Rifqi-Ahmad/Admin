@@ -138,6 +138,7 @@ class ComposerStaticInit688ae7b6ed5b80ce751f31f637f9f04a
         ),
         'F' => 
         array (
+            'Fx3costa\\LaravelChartJs\\' => 24,
             'Fruitcake\\Cors\\' => 15,
             'FontLib\\' => 8,
             'Fideloper\\Proxy\\' => 16,
@@ -412,6 +413,10 @@ class ComposerStaticInit688ae7b6ed5b80ce751f31f637f9f04a
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'Fx3costa\\LaravelChartJs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fx3costa/laravelchartjs/src',
+        ),
         'Fruitcake\\Cors\\' => 
         array (
             0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
@@ -520,10 +525,12 @@ class ComposerStaticInit688ae7b6ed5b80ce751f31f637f9f04a
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
+        'App\\Http\\Controllers\\Keuangan' => __DIR__ . '/../..' . '/app/Http/Controllers/Keuangan.php',
         'App\\Http\\Controllers\\MasterBarangController' => __DIR__ . '/../..' . '/app/Http/Controllers/MasterBarangController.php',
         'App\\Http\\Controllers\\PoDataController' => __DIR__ . '/../..' . '/app/Http/Controllers/PoDataController.php',
         'App\\Http\\Controllers\\PurchaseOrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/PurchaseOrderController.php',
         'App\\Http\\Controllers\\SalesOrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/SalesOrderController.php',
+        'App\\Http\\Controllers\\SoDataController' => __DIR__ . '/../..' . '/app/Http/Controllers/SoDataController.php',
         'App\\Http\\Controllers\\StokMaterialController' => __DIR__ . '/../..' . '/app/Http/Controllers/StokMaterialController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -1522,6 +1529,8 @@ class ComposerStaticInit688ae7b6ed5b80ce751f31f637f9f04a
         'FontLib\\WOFF\\TableDirectoryEntry' => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php',
         'Fruitcake\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
         'Fruitcake\\Cors\\HandleCors' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/HandleCors.php',
+        'Fx3costa\\LaravelChartJs\\Builder' => __DIR__ . '/..' . '/fx3costa/laravelchartjs/src/Builder.php',
+        'Fx3costa\\LaravelChartJs\\Providers\\ChartjsServiceProvider' => __DIR__ . '/..' . '/fx3costa/laravelchartjs/src/Providers/ChartjsServiceProvider.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
         'GuzzleHttp\\ClientInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/ClientInterface.php',
         'GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',
