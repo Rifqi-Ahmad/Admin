@@ -20,9 +20,9 @@
 
             <div class="mt-4">
                 <div class="my-2" style="">
-                    <a href="/purchaseorder/data" class="btn btn-primary" style="float: right">Kembali</a>
+                    <a href="/salesorder/data" class="btn btn-primary" style="float: right">Kembali</a>
 
-                    <a href="/purchaseorder/data/{{$data->id}}/pdf" class="btn btn-danger">Cetak PDF</a>
+                    <a href="/salesorder/data/{{$data->id}}/pdf" class="btn btn-danger">Cetak PDF</a>
                 </div>
                 <table border="0" width=400px>
                     <tr>

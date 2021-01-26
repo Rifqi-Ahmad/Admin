@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\cart;
 use Session;
 use DB;
+use PDF;
 
 class SoDataController extends Controller
 {
@@ -27,20 +28,13 @@ class SoDataController extends Controller
         ]);
         $data = DB::table('salesorder')
             ->select('*')
-            ->where('id', $request->id)
+            ->where('id', '=',$request->id)
             ->first();
 
         $data1 = DB::table('sodetail')
         ->select('*')
-        ->where('pocode', $data->code)
+        ->where('pocode', '=',$data->code)
         ->get();        
-
-        $total = 0;
-
-        foreach($data1 as $item){
-            $total+= $item->sub;
-            Session(['total' => $total]);    
-        }
 
         $pdf = PDF::loadview('/salesorder/pdf',compact('data', 'data1'));
         return $pdf->stream();

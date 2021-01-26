@@ -85,13 +85,18 @@ class PurchaseOrderController extends Controller
         
         foreach(\Cart::getContent() as $item){
            
+            $sum = $item->qty;
+            
             $sto = DB::table('stok')
             ->where('id', '=', $item->id)
             ->first();
 
-            (int)$stok = $sto->qty;
-            (int)$jumlah = $item->qty;
-            $sum = $stok + $jumlah;   
+            if($item->qty != 0){
+                $sum = 0;
+                (int)$stok = $sto->qty;
+                (int)$jumlah = $item->qty;
+                $sum = $stok + $jumlah;  
+            }
 
             DB::table('stok')
                 ->updateOrInsert(

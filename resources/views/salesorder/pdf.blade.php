@@ -1,9 +1,7 @@
 <html>
 
 <head>
-    <title>Purchase Order</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Sales Order</title>
 </head>
 
 <body>
@@ -22,7 +20,7 @@
     </style>
 
     <center>
-        <h1>Purchase Order</h1>
+        <h1>Sales Order</h1>
         <h5>{{$data->code}}</h5>
     </center>
 
@@ -30,12 +28,17 @@
         <tr>
             <th>Date</th>
             <td>:</td>
-            <th>{{date('l, d-m-Y', strtotime($data->date))}}</th>
+            <th>{{ date('l, d-m-Y', $data->date) }}</th>
         </tr>
         <tr>
-            <th>vendor</th>
+            <th>Take Order</th>
             <td>:</td>
-            <th>{{$data->vendor}}</th>
+            <th>{{ date('l, d-m-Y', $data->take) }}</th>
+        </tr>
+        <tr>
+            <th>Finished</th>
+            <td>:</td>
+            <th>{{ date('l, d-m-Y', $data->finished) }}</th>
         </tr>
         <tr>
             <th>Note</th>
@@ -46,7 +49,7 @@
         </tr>
     </table>
 
-    <table class="table table-bordered tab">
+    <table border="1" width="100%" cellspacing="0" cellpadding="10">
         <tr>
             <th>Id</th>
             <th>Desc</th>
@@ -56,7 +59,7 @@
             <th>Price</th>
             <th>Sub Price</th>
         </tr>
-        @foreach (Cart::getContent() as $item)
+        @foreach ($data1 as $item)
 
         <tr>
             <th>
@@ -83,7 +86,7 @@
         </tr>
         @endforeach
         <tr>
-            <th colspan="8">Grand Price : Rp {{Session::get('total')}}</th>
+            <th colspan="8">Grand Price : Rp {{$data->total}}</th>
         </tr>
     </table>
 

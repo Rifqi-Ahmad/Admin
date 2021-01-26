@@ -2,8 +2,7 @@
 
 <head>
     <title>Purchase Order</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -46,47 +45,47 @@
         </tr>
     </table>
 
-    <table class="table table-bordered tab">
-        <tr>
-            <th>Id</th>
-            <th>Desc</th>
-            <th>Color</th>
-            <th>Unit</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Sub Price</th>
-        </tr>
-        @foreach (Cart::getContent() as $item)
-
-        <tr>
-            <th>
-                {{$item->id}}
-            </th>
-            <td>
-                {{$item->desc}}
-            </td>
-            <td>
-                {{$item->color}}
-            </td>
-            <td>
-                {{$item->unit}}
-            </td>
-            <td>
-                {{$item->qty}}
-            </td>
-            <td>
-                {{$item->price}}
-            </td>
-            <td>
-                {{$item->sub}}
-            </td>
-        </tr>
-        @endforeach
-        <tr>
-            <th colspan="8">Grand Price : Rp {{Session::get('total')}}</th>
-        </tr>
-    </table>
-
+    <div style="margin-top: 20px">
+        <table border="1" width="100%" cellspacing="0" cellpadding="10">
+            <tr>
+                <th>Id</th>
+                <th>Desc</th>
+                <th>Color</th>
+                <th>Unit</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Sub Price</th>
+            </tr>
+            @foreach ($data1 as $item)
+            <tr>
+                <th>
+                    {{$item->id}}
+                </th>
+                <td>
+                    {{$item->desc}}
+                </td>
+                <td>
+                    {{$item->color}}
+                </td>
+                <td>
+                    {{$item->unit}}
+                </td>
+                <td>
+                    {{$item->qty}}
+                </td>
+                <td>
+                    {{$item->price}}
+                </td>
+                <td>
+                    {{$item->sub}}
+                </td>
+            </tr>
+            @endforeach
+            <tr>
+                <th colspan="8">Grand Price : Rp {{$data->total}}</th>
+            </tr>
+        </table>
+    </div>
 
 
 

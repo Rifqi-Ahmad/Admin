@@ -20,7 +20,7 @@ class DashboardController extends Controller
 
         for ($i=1; $i < 13; $i++) { 
             $data[] = DB::table('salesorder')
-            ->whereRaw('MONTH(date(date::text)) = ?', [$i])
+            ->whereRaw('MONTH(FROM_UNIXTIME(date)) = ?', [$i])
             ->count();
         }
 

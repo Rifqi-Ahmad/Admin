@@ -36,13 +36,6 @@ class PoDataController extends Controller
         ->where('pocode', $data->code)
         ->get();        
 
-        $total = 0;
-
-        foreach($data1 as $item){
-            $total+= $item->sub;
-            Session(['total' => $total]);    
-        }
-
         $pdf = PDF::loadview('/purchaseorder/pdf',compact('data', 'data1'));
         return $pdf->stream();
     }
